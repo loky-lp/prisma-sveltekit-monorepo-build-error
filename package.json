@@ -1,0 +1,20 @@
+{
+	"name": "camilla",
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"format": "turbo run format",
+		"clean": "rm -rf .turbo node_modules"
+	},
+	"devDependencies": {
+		"@turbo/gen": "^1.13.3",
+		"@types/node": "~20.14.0",
+		"turbo": "^2.0.9",
+		"typescript": "^5.5.2"
+	},
+	"engines": {
+		"node": ">=20.12.0"
+	},
+	"packageManager": "pnpm@9.4.0"
+}

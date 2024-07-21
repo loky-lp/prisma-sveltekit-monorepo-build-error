@@ -1,0 +1,8 @@
+packages:
+  - apps/*
+  - packages/**/*
+  - tooling/*
+
+catalogs:
+  default:
+    'dotenv-cli': ^7.4.1

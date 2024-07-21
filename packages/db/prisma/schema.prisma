@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+/// A simple user role
+enum UserRole {
+  /// The user have no role, this is the default value.
+  NONE
+  /// The user is an administrator and have full access to the system.
+  ADMIN
+}
+
+// The user model
+model User {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  email String @unique @db.VarChar(255)
+
+  emailVerifiedAt DateTime?
+
+  passwordHash String
+
+  image String?
+
+  firstName String? @db.VarChar(255)
+  lastName  String? @db.VarChar(255)
+
+  role UserRole @default(NONE)
+
+  sessions Session[]
+
+  createdAt DateTime  @unique @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  bannedAt  DateTime?
+  deletedAt DateTime?
+
+  @@index(createdAt)
+}
+
+/// The {@link User} auth session, managed by `lucia`.
+model Session {
+  id        String   @id
+  userId    String   @db.Uuid
+  expiresAt DateTime
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}

@@ -1,0 +1,26 @@
+{
+	"name": "@repo-package/db",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./edge": "./src/edge.ts"
+	},
+	"scripts": {
+		"db:generate": "pnpm with-env prisma generate",
+		"db:push": "pnpm with-env prisma db push --skip-generate",
+		"db:studio": "pnpm with-env prisma studio",
+		"clean": "rm -rf .turbo node_modules",
+		"typecheck": "tsc --noEmit --emitDeclarationOnly false",
+		"with-env": "dotenv -e ../../.env --"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.17.0"
+	},
+	"devDependencies": {
+		"@repo-tool/tsconfig": "workspace:*",
+		"dotenv-cli": "catalog:",
+		"prisma": "^5.17.0"
+	}
+}
